@@ -4,12 +4,14 @@ from typing import Union
 
 class SimilarBufferDetector:
     def statistics(self, a: bytearray, b: bytearray) -> dict[str, dict[str, Union[int, bytearray]]]:
-        return {'exactlySamePattern': {
-            'start_a': 0,
-            'start_b': 0,
-            'length': 13,
-            'matched': bytearray(b"Hello, World!")
-        }}
+        if a == b:
+            return {'exactlySameContents': {
+                'start_a': 0,
+                'start_b': 0,
+                'length': len(a),
+                'matched': a
+            }}
+        pass
 
 
 class SimilarBufferDetectorTest(unittest.TestCase):
@@ -19,7 +21,7 @@ class SimilarBufferDetectorTest(unittest.TestCase):
     def test_exact_match(self) -> None:
         actual = self.detector.statistics(bytearray(b"Hello, World!"), bytearray(b"Hello, World!"))
 
-        self.assertEqual({'exactlySamePattern': {
+        self.assertEqual({'exactlySameContents': {
             'start_a': 0,
             'start_b': 0,
             'length': 13,
