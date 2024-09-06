@@ -1,10 +1,15 @@
-from typing import Union
+import abc
+from typing import Any
 
 
-class SimilarBufferDetector:
-    def statistics(
-        self, a: bytearray, b: bytearray
-    ) -> list[dict[str, dict[str, Union[int, bytearray]]]]:
+class Statistic:
+    @abc.abstractmethod
+    def detect(self, a: bytearray, b: bytearray) -> list[dict[str, Any]]:
+        pass
+
+
+class ExactlySameContents(Statistic):
+    def detect(self, a: bytearray, b: bytearray) -> list[dict[str, Any]]:
         if a == b:
             return [
                 {
@@ -16,7 +21,11 @@ class SimilarBufferDetector:
                     }
                 }
             ]
+        return []
 
+
+class SameContents(Statistic):
+    def detect(self, a: bytearray, b: bytearray) -> list[dict[str, Any]]:
         matches = []
         current_match = []
         for i in range(len(a)):
@@ -44,3 +53,14 @@ class SimilarBufferDetector:
                 }
             )
         return m  # type: ignore
+
+
+class SimilarBufferDetector:
+    def __init__(self, *statistics: Statistic) -> None:
+        self._statistics = statistics
+
+    def statistics(self, a: bytearray, b: bytearray) -> list[dict[str, Any]]:
+        result = []
+        for stat in self._statistics:
+            result += stat.detect(a, b)
+        return result

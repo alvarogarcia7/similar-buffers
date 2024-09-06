@@ -1,11 +1,11 @@
 import unittest
 
-from similar_buffers import SimilarBufferDetector
+from similar_buffers import SimilarBufferDetector, ExactlySameContents, SameContents
 
 
 class SimilarBufferDetectorTest(unittest.TestCase):
     def setUp(self) -> None:
-        self.detector = SimilarBufferDetector()
+        self.detector = SimilarBufferDetector(ExactlySameContents(), SameContents())
 
     def test_exact_match(self) -> None:
         actual = self.detector.statistics(
