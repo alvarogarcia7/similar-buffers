@@ -1,9 +1,7 @@
 import unittest
-
-from similar_buffers import SimilarBufferDetector, ExactlySameContents, SameContents
-
-import unittest
 from unittest.mock import MagicMock
+
+from similar_buffers import ExactlySameContents, SameContents
 from similar_buffers import SimilarBufferDetector, Statistic
 
 
@@ -17,14 +15,12 @@ class SimilarBufferDetectorMockTest(unittest.TestCase):
 
         detector = SimilarBufferDetector(mock_statistic1, mock_statistic2)
 
-        detector.statistics(bytearray(b"Hello, World!"), bytearray(b"Hello, World!"))
+        a = bytearray(b"Hello, World!")
+        b = bytearray(b"Hello, World!")
+        detector.statistics(a, b)
 
-        mock_statistic1.detect.assert_called_once_with(
-            bytearray(b"Hello, World!"), bytearray(b"Hello, World!")
-        )
-        mock_statistic2.detect.assert_called_once_with(
-            bytearray(b"Hello, World!"), bytearray(b"Hello, World!")
-        )
+        mock_statistic1.detect.assert_called_once_with(a, b)
+        mock_statistic2.detect.assert_called_once_with(a, b)
 
 
 if __name__ == "__main__":
