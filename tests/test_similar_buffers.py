@@ -11,7 +11,7 @@ class SimilarBufferDetector:
                 'length': len(a),
                 'matched': a
             }}
-        pass
+        return {}
 
 
 class SimilarBufferDetectorTest(unittest.TestCase):
@@ -27,6 +27,11 @@ class SimilarBufferDetectorTest(unittest.TestCase):
             'length': 13,
             'matched': bytearray(b"Hello, World!")
         }}, actual)
+
+    def test_not_exact_match(self) -> None:
+        actual = self.detector.statistics(bytearray(b"Hello, John!"), bytearray(b"Hello, World!"))
+
+        self.assertEqual({}, actual)
 
 
 if __name__ == '__main__':
