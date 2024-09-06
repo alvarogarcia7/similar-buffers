@@ -23,10 +23,6 @@ class SimilarBufferDetectorMockTest(unittest.TestCase):
         mock_statistic2.detect.assert_called_once_with(a, b)
 
 
-if __name__ == "__main__":
-    unittest.main()
-
-
 class SimilarBufferDetectorTest(unittest.TestCase):
     def setUp(self) -> None:
         self.detector = SimilarBufferDetector(ExactlySameContents(), SameContents())
