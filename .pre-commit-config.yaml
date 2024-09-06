@@ -18,6 +18,7 @@ repos:
         name: Python Unit Tests
         entry: make test-python
         language: system
+        always_run: true
       - id: freeze-requirements
         name: Freeze Requirements
         entry: make freeze
