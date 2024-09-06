@@ -11,16 +11,7 @@ class Statistic:
 class ExactlySameContents(Statistic):
     def detect(self, a: bytearray, b: bytearray) -> list[dict[str, Any]]:
         if a == b:
-            return [
-                {
-                    "exactlySameContents": {
-                        "start_a": 0,
-                        "start_b": 0,
-                        "length": len(a),
-                        "matched": a,
-                    }
-                }
-            ]
+            return [{"exactlySameContents": {}}]
         return []
 
 

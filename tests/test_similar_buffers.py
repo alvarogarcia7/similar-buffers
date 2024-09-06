@@ -13,16 +13,7 @@ class SimilarBufferDetectorTest(unittest.TestCase):
         )
 
         self.assertEqual(
-            [
-                {
-                    "exactlySameContents": {
-                        "start_a": 0,
-                        "start_b": 0,
-                        "length": 13,
-                        "matched": bytearray(b"Hello, World!"),
-                    }
-                }
-            ],
+            [{"exactlySameContents": {}}],
             actual,
         )
 
@@ -64,16 +55,7 @@ class ExactlySameContentsTest(unittest.TestCase):
         )
 
         self.assertEqual(
-            [
-                {
-                    "exactlySameContents": {
-                        "start_a": 0,
-                        "start_b": 0,
-                        "length": 13,
-                        "matched": bytearray(b"Hello, World!"),
-                    }
-                }
-            ],
+            [{"exactlySameContents": {}}],
             actual,
         )
 
