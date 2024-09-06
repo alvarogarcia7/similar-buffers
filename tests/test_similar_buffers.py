@@ -89,14 +89,14 @@ class SameContentsTest(unittest.TestCase):
     def setUp(self) -> None:
         self.statistic = SameContents()
 
-    def test_exact_match(self) -> None:
+    def test_no_match(self) -> None:
         actual = self.statistic.detect(
             bytearray(b"Hello, World!"), bytearray(b"Hello, World!")
         )
 
         self.assertEqual([], actual)
 
-    def test_not_exact_match(self) -> None:
+    def test_several_matches(self) -> None:
         actual = self.statistic.detect(
             bytearray(b"Hello, John!"), bytearray(b"Hello, World!")
         )
