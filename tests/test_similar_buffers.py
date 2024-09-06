@@ -7,11 +7,8 @@ from similar_buffers import SimilarBufferDetector, Statistic
 
 class SimilarBufferDetectorMockTest(unittest.TestCase):
     def test_all_statistics_executed(self) -> None:
-        mock_statistic1 = MagicMock(spec=Statistic)
-        mock_statistic2 = MagicMock(spec=Statistic)
-
-        mock_statistic1.detect.return_value = []
-        mock_statistic2.detect.return_value = []
+        mock_statistic1 = self.mock_statistic()
+        mock_statistic2 = self.mock_statistic()
 
         detector = SimilarBufferDetector(mock_statistic1, mock_statistic2)
 
@@ -21,6 +18,12 @@ class SimilarBufferDetectorMockTest(unittest.TestCase):
 
         mock_statistic1.detect.assert_called_once_with(a, b)
         mock_statistic2.detect.assert_called_once_with(a, b)
+
+    @staticmethod
+    def mock_statistic() -> MagicMock:
+        mock_statistic1 = MagicMock(spec=Statistic)
+        mock_statistic1.detect.return_value = []
+        return mock_statistic1
 
 
 class ExactlySameContentsTest(unittest.TestCase):
