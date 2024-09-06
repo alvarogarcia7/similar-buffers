@@ -54,3 +54,8 @@ class SimilarBufferDetector:
         for stat in self._statistics:
             result += stat.detect(a, b)
         return result
+
+
+class SameContents2(Statistic):
+    def detect(self, a: bytearray, b: bytearray) -> list[dict[str, Any]]:
+        return []

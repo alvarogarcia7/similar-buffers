@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import MagicMock
 
-from similar_buffers import ExactlySameContents, SameContents
+from similar_buffers import ExactlySameContents, SameContents, SameContents2
 from similar_buffers import SimilarBufferDetector, Statistic
 
 
@@ -87,6 +87,16 @@ class SameContentsTest(unittest.TestCase):
             ],
             actual,
         )
+
+
+class SameContents2Test(unittest.TestCase):
+    def setUp(self) -> None:
+        self.statistic = SameContents2()
+
+    def test_no_match(self) -> None:
+        actual = self.statistic.detect(bytearray(b"1234"), bytearray(b"5678"))
+
+        self.assertEqual([], actual)
 
 
 if __name__ == "__main__":
