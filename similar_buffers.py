@@ -56,7 +56,7 @@ class SimilarBufferDetector:
         return result
 
 
-class SameContents2(Statistic):
+class SameStrings(Statistic):
     def detect(self, a: bytearray, b: bytearray) -> list[dict[str, Any]]:
         def find_common_strings(a: bytearray, b: bytearray) -> list[dict[str, Any]]:
             matches = []
