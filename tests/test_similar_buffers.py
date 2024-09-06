@@ -6,18 +6,22 @@ from similar_buffers import SimilarBufferDetector, Statistic
 
 
 class SimilarBufferDetectorMockTest(unittest.TestCase):
+
+    def setUp(self) -> None:
+        super().setUp()
+
+        self.statistic1 = self.mock_statistic()
+        self.statistic2 = self.mock_statistic()
+        self.detector = SimilarBufferDetector(self.statistic1, self.statistic2)
+
     def test_all_statistics_executed(self) -> None:
-        statistic1 = self.mock_statistic()
-        statistic2 = self.mock_statistic()
-
-        detector = SimilarBufferDetector(statistic1, statistic2)
-
         a = bytearray(b"Hello, World!")
         b = bytearray(b"Hello, World!")
-        detector.statistics(a, b)
 
-        statistic1.detect.assert_called_once_with(a, b)
-        statistic2.detect.assert_called_once_with(a, b)
+        self.detector.statistics(a, b)
+
+        self.statistic1.detect.assert_called_once_with(a, b)
+        self.statistic2.detect.assert_called_once_with(a, b)
 
     @staticmethod
     def mock_statistic() -> MagicMock:
