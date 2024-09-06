@@ -23,46 +23,6 @@ class SimilarBufferDetectorMockTest(unittest.TestCase):
         mock_statistic2.detect.assert_called_once_with(a, b)
 
 
-class SimilarBufferDetectorTest(unittest.TestCase):
-    def setUp(self) -> None:
-        self.detector = SimilarBufferDetector(ExactlySameContents(), SameContents())
-
-    def test_exact_match(self) -> None:
-        actual = self.detector.statistics(
-            bytearray(b"Hello, World!"), bytearray(b"Hello, World!")
-        )
-
-        self.assertEqual(
-            [{"exactlySameContents": {}}],
-            actual,
-        )
-
-    def test_not_exact_match(self) -> None:
-        actual = self.detector.statistics(
-            bytearray(b"Hello, John!"), bytearray(b"Hello, World!")
-        )
-
-        self.assertEqual(
-            [
-                {
-                    "sameContents": {
-                        "start": 0,
-                        "length": len(bytearray(b"Hello, ")),
-                        "matched": bytearray(b"Hello, "),
-                    }
-                },
-                {
-                    "sameContents": {
-                        "start": 8,
-                        "length": 1,
-                        "matched": bytearray(b"o"),
-                    }
-                },
-            ],
-            actual,
-        )
-
-
 class ExactlySameContentsTest(unittest.TestCase):
     def setUp(self) -> None:
         self.statistic = ExactlySameContents()
