@@ -98,6 +98,23 @@ class SameContents2Test(unittest.TestCase):
 
         self.assertEqual([], actual)
 
+    def test_match(self) -> None:
+        actual = self.statistic.detect(bytearray(b"1234"), bytearray(b"01234"))
+
+        self.assertEqual(
+            [
+                {
+                    "sameContents2": {
+                        "start_a": 0,
+                        "start_b": 1,
+                        "length": 4,
+                        "matched": bytearray(b"1234"),
+                    }
+                }
+            ],
+            actual,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
