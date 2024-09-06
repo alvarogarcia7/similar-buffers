@@ -26,16 +26,14 @@ class SimilarBufferDetectorTest(unittest.TestCase):
             [
                 {
                     "sameContents": {
-                        "start_a": 0,
-                        "start_b": 0,
+                        "start": 0,
                         "length": len(bytearray(b"Hello, ")),
                         "matched": bytearray(b"Hello, "),
                     }
                 },
                 {
                     "sameContents": {
-                        "start_a": 8,
-                        "start_b": 8,
+                        "start": 8,
                         "length": 1,
                         "matched": bytearray(b"o"),
                     }
@@ -87,16 +85,14 @@ class SameContentsTest(unittest.TestCase):
             [
                 {
                     "sameContents": {
-                        "start_a": 0,
-                        "start_b": 0,
+                        "start": 0,
                         "length": len(bytearray(b"Hello, ")),
                         "matched": bytearray(b"Hello, "),
                     }
                 },
                 {
                     "sameContents": {
-                        "start_a": 8,
-                        "start_b": 8,
+                        "start": 8,
                         "length": 1,
                         "matched": bytearray(b"o"),
                     }

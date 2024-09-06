@@ -36,8 +36,7 @@ class SameContents(Statistic):
             m.append(
                 {
                     "sameContents": {
-                        "start_a": start_a,
-                        "start_b": start_b,
+                        "start": start_a,
                         "length": length,
                         "matched": matched,
                     }
