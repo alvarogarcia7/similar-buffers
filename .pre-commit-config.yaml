@@ -26,4 +26,3 @@ repos:
         name: Reformat Python with Black
         entry: make format
         language: system
-        pass_filenames: false
