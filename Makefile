@@ -17,3 +17,6 @@ test-python: check-virtual-env
 
 pre-commit: test
 .PHONY: pre-commit
+
+format: check-virtual-env
+	black .

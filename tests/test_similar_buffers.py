@@ -3,14 +3,20 @@ from typing import Union
 
 
 class SimilarBufferDetector:
-    def statistics(self, a: bytearray, b: bytearray) -> list[dict[str, dict[str, Union[int, bytearray]]]]:
+    def statistics(
+        self, a: bytearray, b: bytearray
+    ) -> list[dict[str, dict[str, Union[int, bytearray]]]]:
         if a == b:
-            return [{'exactlySameContents': {
-                'start_a': 0,
-                'start_b': 0,
-                'length': len(a),
-                'matched': a
-            }}]
+            return [
+                {
+                    "exactlySameContents": {
+                        "start_a": 0,
+                        "start_b": 0,
+                        "length": len(a),
+                        "matched": a,
+                    }
+                }
+            ]
 
         matches = []
         current_match = []
@@ -27,14 +33,18 @@ class SimilarBufferDetector:
             start_a = matches[i][0]
             start_b = matches[i][0]
             length = len(matches[i])
-            matched = a[start_a:start_a + length]
-            m.append({'sameContents': {
-                'start_a': start_a,
-                'start_b': start_b,
-                'length': length,
-                'matched': matched
-            }})
-        return m
+            matched = a[start_a : start_a + length]
+            m.append(
+                {
+                    "sameContents": {
+                        "start_a": start_a,
+                        "start_b": start_b,
+                        "length": length,
+                        "matched": matched,
+                    }
+                }
+            )
+        return m  # type: ignore
 
 
 class SimilarBufferDetectorTest(unittest.TestCase):
@@ -42,25 +52,51 @@ class SimilarBufferDetectorTest(unittest.TestCase):
         self.detector = SimilarBufferDetector()
 
     def test_exact_match(self) -> None:
-        actual = self.detector.statistics(bytearray(b"Hello, World!"), bytearray(b"Hello, World!"))
+        actual = self.detector.statistics(
+            bytearray(b"Hello, World!"), bytearray(b"Hello, World!")
+        )
 
-        self.assertEqual([{'exactlySameContents': {
-            'start_a': 0,
-            'start_b': 0,
-            'length': 13,
-            'matched': bytearray(b"Hello, World!")
-        }}], actual)
+        self.assertEqual(
+            [
+                {
+                    "exactlySameContents": {
+                        "start_a": 0,
+                        "start_b": 0,
+                        "length": 13,
+                        "matched": bytearray(b"Hello, World!"),
+                    }
+                }
+            ],
+            actual,
+        )
 
     def test_not_exact_match(self) -> None:
-        actual = self.detector.statistics(bytearray(b"Hello, John!"), bytearray(b"Hello, World!"))
+        actual = self.detector.statistics(
+            bytearray(b"Hello, John!"), bytearray(b"Hello, World!")
+        )
 
-        self.assertEqual([
-            {'sameContents': {'start_a': 0, 'start_b': 0, 'length': len(bytearray(b"Hello, ")),
-                              'matched': bytearray(b"Hello, ")}},
-            {'sameContents': {'start_a': 8, 'start_b': 8, 'length': 1, 'matched': bytearray(b"o")}}
-        ],
-            actual)
+        self.assertEqual(
+            [
+                {
+                    "sameContents": {
+                        "start_a": 0,
+                        "start_b": 0,
+                        "length": len(bytearray(b"Hello, ")),
+                        "matched": bytearray(b"Hello, "),
+                    }
+                },
+                {
+                    "sameContents": {
+                        "start_a": 8,
+                        "start_b": 8,
+                        "length": 1,
+                        "matched": bytearray(b"o"),
+                    }
+                },
+            ],
+            actual,
+        )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

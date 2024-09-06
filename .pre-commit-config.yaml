@@ -22,3 +22,8 @@ repos:
         name: Freeze Requirements
         entry: make freeze
         language: system
+      - id: black
+        name: Reformat Python with Black
+        entry: make format
+        language: system
+        pass_filenames: false
