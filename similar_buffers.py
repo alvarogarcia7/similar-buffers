@@ -30,7 +30,6 @@ class SameContents(Statistic):
         m = []
         for i in range(len(matches)):
             start_a = matches[i][0]
-            start_b = matches[i][0]
             length = len(matches[i])
             matched = a[start_a : start_a + length]
             m.append(
