@@ -12,9 +12,6 @@ The library is designed to be modular and extensible (following the OCP). The ma
 * `Statistic`: A statistic is the interface that receives two buffers and computes a single statistic
 * `SimilarBufferDetector`: The main class that receives a list of statistics. It is modeled as a Rules Engine.
 
-Some caveats:
-
-1. The statistics must not share results in the same key. Each statistic defines its own key (and they must be different)
 
 # Running it
 
