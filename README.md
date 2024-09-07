@@ -1,4 +1,6 @@
-# Python Boilerplate
+# Similar Buffers detector
+
+# Running it
 
 ## Getting started - Local python
 
