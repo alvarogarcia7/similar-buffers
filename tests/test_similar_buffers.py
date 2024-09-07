@@ -152,6 +152,38 @@ class SameStringsTest(unittest.TestCase):
             actual,
         )
 
+    def test_multiple_matches_multiple_chars(self) -> None:
+        actual = self.statistic.detect(bytearray(b"00x234x11"), bytearray(b"00y234y11"))
+        self.assertEqual(
+            [
+                {
+                    "sameString": {
+                        "start_a": 0,
+                        "start_b": 0,
+                        "length": 2,
+                        "matched": bytearray(b"00"),
+                    }
+                },
+                {
+                    "sameString": {
+                        "start_a": 3,
+                        "start_b": 3,
+                        "length": 3,
+                        "matched": bytearray(b"234"),
+                    }
+                },
+                {
+                    "sameString": {
+                        "start_a": 7,
+                        "start_b": 7,
+                        "length": 2,
+                        "matched": bytearray(b"11"),
+                    }
+                },
+            ],
+            actual,
+        )
+
     def test_partial_match_beginning(self) -> None:
         actual = self.statistic.detect(bytearray(b"1234"), bytearray(b"123"))
         self.assertEqual(
