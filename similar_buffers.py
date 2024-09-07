@@ -62,24 +62,43 @@ class SameStrings(Statistic):
             matches = []
             i = 0
 
-            while i < len(a):
+            if len(a) > len(b):
+                longest = a
+                shortest = b
+                longest_key = "a"
+                shortest_key = "b"
+            else:
+                longest = b
+                shortest = a
+                longest_key = "b"
+                shortest_key = "a"
+
+            assert longest_key != shortest_key
+
+            while i < len(longest):
                 j = 0
-                while j < len(b):
-                    if a[i] == b[j]:
-                        start_a = i
-                        start_b = j
+                while j < len(shortest):
+                    if longest[i] == shortest[j]:
+                        start_longest = i
+                        start_shortest = j
                         length = 0
-                        while i < len(a) and j < len(b) and a[i] == b[j]:
+                        while (
+                            i < len(longest)
+                            and j < len(shortest)
+                            and longest[i] == shortest[j]
+                        ):
                             length += 1
                             i += 1
                             j += 1
                         matches.append(
                             {
                                 "sameString": {
-                                    "start_a": start_a,
-                                    "start_b": start_b,
+                                    f"start_{longest_key}": start_longest,
+                                    f"start_{shortest_key}": start_shortest,
                                     "length": length,
-                                    "matched": a[start_a : start_a + length],
+                                    "matched": longest[
+                                        start_longest : start_longest + length
+                                    ],
                                 }
                             }
                         )
