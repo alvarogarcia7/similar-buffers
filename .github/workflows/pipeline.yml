@@ -27,3 +27,7 @@ jobs:
     - name: Run Typecheck
       run: |
         mypy . --exclude venv
+
+    - name: Format code
+      run: |
+        black .
