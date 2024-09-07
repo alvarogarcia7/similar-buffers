@@ -58,55 +58,52 @@ class SimilarBufferDetector:
 
 class SameStrings(Statistic):
     def detect(self, a: bytearray, b: bytearray) -> list[dict[str, Any]]:
-        def find_common_strings(a: bytearray, b: bytearray) -> list[dict[str, Any]]:
-            matches = []
-            i = 0
+        matches = []
+        i = 0
 
-            if len(a) > len(b):
-                longest = a
-                shortest = b
-                longest_key = "a"
-                shortest_key = "b"
-            else:
-                longest = b
-                shortest = a
-                longest_key = "b"
-                shortest_key = "a"
+        if len(a) > len(b):
+            longest = a
+            shortest = b
+            longest_key = "a"
+            shortest_key = "b"
+        else:
+            longest = b
+            shortest = a
+            longest_key = "b"
+            shortest_key = "a"
 
-            assert longest_key != shortest_key
+        assert longest_key != shortest_key
 
-            while i < len(longest):
-                j = 0
-                while j < len(shortest):
-                    if longest[i] == shortest[j]:
-                        start_longest = i
-                        start_shortest = j
-                        length = 0
-                        while (
-                            i < len(longest)
-                            and j < len(shortest)
-                            and longest[i] == shortest[j]
-                        ):
-                            length += 1
-                            i += 1
-                            j += 1
-                        matches.append(
-                            {
-                                "sameString": {
-                                    f"start_{longest_key}": start_longest,
-                                    f"start_{shortest_key}": start_shortest,
-                                    "length": length,
-                                    "matched": longest[
-                                        start_longest : start_longest + length
-                                    ],
-                                }
+        while i < len(longest):
+            j = 0
+            while j < len(shortest):
+                if longest[i] == shortest[j]:
+                    start_longest = i
+                    start_shortest = j
+                    length = 0
+                    while (
+                        i < len(longest)
+                        and j < len(shortest)
+                        and longest[i] == shortest[j]
+                    ):
+                        length += 1
+                        i += 1
+                        j += 1
+                    matches.append(
+                        {
+                            "sameString": {
+                                f"start_{longest_key}": start_longest,
+                                f"start_{shortest_key}": start_shortest,
+                                "length": length,
+                                "matched": longest[
+                                    start_longest : start_longest + length
+                                ],
                             }
-                        )
-                        i -= 1
-                        j -= 1
-                    j += 1
-                i += 1
+                        }
+                    )
+                    i -= 1
+                    j -= 1
+                j += 1
+            i += 1
 
-            return matches
-
-        return find_common_strings(a, b)
+        return matches
