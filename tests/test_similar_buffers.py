@@ -235,22 +235,22 @@ class SameStringsTest(unittest.TestCase):
         actual = self.statistic.detect(bytearray(b""), bytearray(b""))
         self.assertEqual([], actual)
 
-    # def test_large_bytearrays_multiple_matches(self) -> None:
-    #     a = bytearray(b"1234" * 3)
-    #     b = bytearray(b"1234")
-    #     actual = self.statistic.detect(a, b)
-    #     expected = [
-    #         {
-    #             "sameString": {
-    #                 "start_a": i * 4,
-    #                 "start_b": 0,
-    #                 "length": 4,
-    #                 "matched": bytearray(b"1234"),
-    #             }
-    #         }
-    #         for i in range(3)
-    #     ]
-    #     self.assertEqual(expected, actual)
+    def test_large_bytearrays_multiple_matches(self) -> None:
+        a = bytearray(b"1234" * 3)
+        b = bytearray(b"1234")
+        actual = self.statistic.detect(a, b)
+        expected = [
+            {
+                "sameString": {
+                    "start_a": i * 4,
+                    "start_b": 0,
+                    "length": 4,
+                    "matched": bytearray(b"1234"),
+                }
+            }
+            for i in range(3)
+        ]
+        self.assertEqual(expected, actual)
 
 
 if __name__ == "__main__":
