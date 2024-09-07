@@ -104,7 +104,7 @@ class SameStringsTest(unittest.TestCase):
         self.assertEqual(
             [
                 {
-                    "sameContents2": {
+                    "sameString": {
                         "start_a": 0,
                         "start_b": 1,
                         "length": 4,

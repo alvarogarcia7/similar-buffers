@@ -75,7 +75,7 @@ class SameStrings(Statistic):
                             j += 1
                         matches.append(
                             {
-                                "sameContents2": {
+                                "sameString": {
                                     "start_a": start_a,
                                     "start_b": start_b,
                                     "length": length,
