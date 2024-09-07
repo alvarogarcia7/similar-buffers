@@ -147,6 +147,22 @@ class SameStringsTest(unittest.TestCase):
             actual,
         )
 
+    def test_partial_match_beginning_inverse(self) -> None:
+        actual = self.statistic.detect(bytearray(b"123"), bytearray(b"1234"))
+        self.assertEqual(
+            [
+                {
+                    "sameString": {
+                        "start_a": 0,
+                        "start_b": 0,
+                        "length": 3,
+                        "matched": bytearray(b"123"),
+                    }
+                }
+            ],
+            actual,
+        )
+
     def test_partial_match_end(self) -> None:
         actual = self.statistic.detect(bytearray(b"1234"), bytearray(b"234"))
         self.assertEqual(
