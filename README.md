@@ -1,5 +1,9 @@
 # Similar Buffers detector
 
+This is a library to detect similarities between buffers.
+
+Given two buffers, `a` and `b`, the library will return a list of statistics about the similarity between the two buffers.
+
 # Running it
 
 ## Getting started - Local python
