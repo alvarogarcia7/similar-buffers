@@ -163,29 +163,29 @@ class SameStringsTest(unittest.TestCase):
             actual,
         )
 
-    # def test_multiple_matches(self) -> None:
-    #     actual = self.statistic.detect(bytearray(b"12341234"), bytearray(b"1234"))
-    #     self.assertEqual(
-    #         [
-    #             {
-    #                 "sameString": {
-    #                     "start_a": 0,
-    #                     "start_b": 0,
-    #                     "length": 4,
-    #                     "matched": bytearray(b"1234"),
-    #                 }
-    #             },
-    #             {
-    #                 "sameString": {
-    #                     "start_a": 4,
-    #                     "start_b": 0,
-    #                     "length": 4,
-    #                     "matched": bytearray(b"1234"),
-    #                 }
-    #             },
-    #         ],
-    #         actual,
-    #     )
+    def test_multiple_matches(self) -> None:
+        actual = self.statistic.detect(bytearray(b"12341234"), bytearray(b"1234"))
+        self.assertEqual(
+            [
+                {
+                    "sameString": {
+                        "start_a": 0,
+                        "start_b": 0,
+                        "length": 4,
+                        "matched": bytearray(b"1234"),
+                    }
+                },
+                {
+                    "sameString": {
+                        "start_a": 4,
+                        "start_b": 0,
+                        "length": 4,
+                        "matched": bytearray(b"1234"),
+                    }
+                },
+            ],
+            actual,
+        )
 
     # def test_overlapping_matches(self) -> None:
     #     actual = self.statistic.detect(bytearray(b"1231234"), bytearray(b"1234"))
