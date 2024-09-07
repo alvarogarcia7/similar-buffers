@@ -98,6 +98,11 @@ class SameStringsTest(unittest.TestCase):
 
         self.assertEqual([], actual)
 
+    def test_no_match_when_empty_variables(self) -> None:
+        actual = self.statistic.detect(bytearray(b""), bytearray(b""))
+
+        self.assertEqual([], actual)
+
     def test_exact_match(self) -> None:
         actual = self.statistic.detect(bytearray(b"1234"), bytearray(b"1234"))
         self.assertEqual(
