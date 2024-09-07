@@ -59,7 +59,6 @@ class SimilarBufferDetector:
 class SameStrings(Statistic):
     def detect(self, a: bytearray, b: bytearray) -> list[dict[str, Any]]:
         matches = []
-        i = 0
 
         if len(a) > len(b):
             longest = a
@@ -74,6 +73,7 @@ class SameStrings(Statistic):
 
         assert longest_key != shortest_key
 
+        i = 0
         while i < len(longest):
             j = 0
             while j < len(shortest):
