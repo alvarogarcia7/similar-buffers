@@ -26,6 +26,7 @@ class SameContents(Statistic):
                 if current_match:
                     matches.append(current_match)
                     current_match = []
+        del current_match
 
         results = []
         for i in range(len(matches)):
