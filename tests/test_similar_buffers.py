@@ -236,7 +236,7 @@ class SameStringsTest(unittest.TestCase):
         self.assertEqual([], actual)
 
     # def test_large_bytearrays_multiple_matches(self) -> None:
-    #     a = bytearray(b"1234" * 1000)
+    #     a = bytearray(b"1234" * 3)
     #     b = bytearray(b"1234")
     #     actual = self.statistic.detect(a, b)
     #     expected = [
@@ -248,7 +248,7 @@ class SameStringsTest(unittest.TestCase):
     #                 "matched": bytearray(b"1234"),
     #             }
     #         }
-    #         for i in range(1000)
+    #         for i in range(3)
     #     ]
     #     self.assertEqual(expected, actual)
 
