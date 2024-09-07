@@ -115,6 +115,143 @@ class SameStringsTest(unittest.TestCase):
             actual,
         )
 
+    def test_exact_match(self) -> None:
+        actual = self.statistic.detect(bytearray(b"1234"), bytearray(b"1234"))
+        self.assertEqual(
+            [
+                {
+                    "sameString": {
+                        "start_a": 0,
+                        "start_b": 0,
+                        "length": 4,
+                        "matched": bytearray(b"1234"),
+                    }
+                }
+            ],
+            actual,
+        )
+
+    def test_partial_match_beginning(self) -> None:
+        actual = self.statistic.detect(bytearray(b"1234"), bytearray(b"123"))
+        self.assertEqual(
+            [
+                {
+                    "sameString": {
+                        "start_a": 0,
+                        "start_b": 0,
+                        "length": 3,
+                        "matched": bytearray(b"123"),
+                    }
+                }
+            ],
+            actual,
+        )
+
+    def test_partial_match_end(self) -> None:
+        actual = self.statistic.detect(bytearray(b"1234"), bytearray(b"234"))
+        self.assertEqual(
+            [
+                {
+                    "sameString": {
+                        "start_a": 1,
+                        "start_b": 0,
+                        "length": 3,
+                        "matched": bytearray(b"234"),
+                    }
+                }
+            ],
+            actual,
+        )
+
+    # def test_multiple_matches(self) -> None:
+    #     actual = self.statistic.detect(bytearray(b"12341234"), bytearray(b"1234"))
+    #     self.assertEqual(
+    #         [
+    #             {
+    #                 "sameString": {
+    #                     "start_a": 0,
+    #                     "start_b": 0,
+    #                     "length": 4,
+    #                     "matched": bytearray(b"1234"),
+    #                 }
+    #             },
+    #             {
+    #                 "sameString": {
+    #                     "start_a": 4,
+    #                     "start_b": 0,
+    #                     "length": 4,
+    #                     "matched": bytearray(b"1234"),
+    #                 }
+    #             },
+    #         ],
+    #         actual,
+    #     )
+
+    # def test_overlapping_matches(self) -> None:
+    #     actual = self.statistic.detect(bytearray(b"1231234"), bytearray(b"1234"))
+    #     self.assertEqual(
+    #         [
+    #             {
+    #                 "sameString": {
+    #                     "start_a": 0,
+    #                     "start_b": 0,
+    #                     "length": 3,
+    #                     "matched": bytearray(b"123"),
+    #                 }
+    #             },
+    #             {
+    #                 "sameString": {
+    #                     "start_a": 3,
+    #                     "start_b": 0,
+    #                     "length": 4,
+    #                     "matched": bytearray(b"1234"),
+    #                 }
+    #             },
+    #         ],
+    #         actual,
+    #     )
+
+    def test_single_character_match(self) -> None:
+        actual = self.statistic.detect(bytearray(b"1"), bytearray(b"1"))
+        self.assertEqual(
+            [
+                {
+                    "sameString": {
+                        "start_a": 0,
+                        "start_b": 0,
+                        "length": 1,
+                        "matched": bytearray(b"1"),
+                    }
+                }
+            ],
+            actual,
+        )
+
+    def test_case_sensitivity(self) -> None:
+        actual = self.statistic.detect(bytearray(b"abc"), bytearray(b"ABC"))
+        self.assertEqual([], actual)
+
+    def test_empty_bytearrays(self) -> None:
+        actual = self.statistic.detect(bytearray(b""), bytearray(b""))
+        self.assertEqual([], actual)
+
+    # def test_large_bytearrays_multiple_matches(self) -> None:
+    #     a = bytearray(b"1234" * 1000)
+    #     b = bytearray(b"1234")
+    #     actual = self.statistic.detect(a, b)
+    #     expected = [
+    #         {
+    #             "sameString": {
+    #                 "start_a": i * 4,
+    #                 "start_b": 0,
+    #                 "length": 4,
+    #                 "matched": bytearray(b"1234"),
+    #             }
+    #         }
+    #         for i in range(1000)
+    #     ]
+    #     self.assertEqual(expected, actual)
+
 
 if __name__ == "__main__":
     unittest.main()
