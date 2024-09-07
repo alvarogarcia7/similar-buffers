@@ -27,12 +27,12 @@ class SameContents(Statistic):
                     matches.append(current_match)
                     current_match = []
 
-        m = []
+        results = []
         for i in range(len(matches)):
             start_a = matches[i][0]
             length = len(matches[i])
             matched = a[start_a : start_a + length]
-            m.append(
+            results.append(
                 {
                     "sameContents": {
                         "start": start_a,
@@ -41,7 +41,7 @@ class SameContents(Statistic):
                     }
                 }
             )
-        return m  # type: ignore
+        return results  # type: ignore
 
 
 class SimilarBufferDetector:
