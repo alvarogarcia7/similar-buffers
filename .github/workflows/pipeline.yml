@@ -30,4 +30,4 @@ jobs:
 
     - name: Format code
       run: |
-        black .
+        black --check .
