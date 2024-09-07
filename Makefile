@@ -20,3 +20,7 @@ pre-commit: test
 
 format: check-virtual-env
 	black .
+
+docker-build:
+	docker compose build
+.PHONY: docker-build
