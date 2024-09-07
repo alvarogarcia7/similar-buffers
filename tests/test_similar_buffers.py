@@ -184,18 +184,67 @@ class SameStringsTest(unittest.TestCase):
             actual,
         )
 
-    def test_partial_match_beginning(self) -> None:
-        actual = self.statistic.detect(bytearray(b"1234"), bytearray(b"123"))
+    def test_multiple_matches_multiple_chars_with_repeated_chars(self) -> None:
+        """It detects the match from the beginning of a 00 with the end of b 00"""
+        actual = self.statistic.detect(bytearray(b"00x234x00"), bytearray(b"00y234y00"))
         self.assertEqual(
             [
                 {
                     "sameString": {
+                        "length": 2,
+                        "matched": bytearray(b"00"),
                         "start_a": 0,
                         "start_b": 0,
-                        "length": 3,
-                        "matched": bytearray(b"123"),
                     }
-                }
+                },
+                {
+                    "sameString": {
+                        "length": 1,
+                        "matched": bytearray(b"0"),
+                        "start_a": 7,
+                        "start_b": 1,
+                    }
+                },
+                {
+                    "sameString": {
+                        "length": 1,
+                        "matched": bytearray(b"0"),
+                        "start_a": 8,
+                        "start_b": 1,
+                    }
+                },
+                {
+                    "sameString": {
+                        "length": 3,
+                        "matched": bytearray(b"234"),
+                        "start_a": 3,
+                        "start_b": 3,
+                    }
+                },
+                {
+                    "sameString": {
+                        "length": 2,
+                        "matched": bytearray(b"00"),
+                        "start_a": 0,
+                        "start_b": 7,
+                    }
+                },
+                {
+                    "sameString": {
+                        "length": 1,
+                        "matched": bytearray(b"0"),
+                        "start_a": 7,
+                        "start_b": 8,
+                    }
+                },
+                {
+                    "sameString": {
+                        "length": 1,
+                        "matched": bytearray(b"0"),
+                        "start_a": 8,
+                        "start_b": 8,
+                    }
+                },
             ],
             actual,
         )
